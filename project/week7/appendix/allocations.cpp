@@ -1,6 +1,6 @@
 /**
  * @file allocations.cpp
- * @brief L7 [Appendix xiii], make_shared Allocates Once: counts the heap
+ * @brief L7 [Appendix xiv], make_shared Allocates Once: counts the heap
  *        allocations of std::make_shared and of std::shared_ptr{new ...}.
  * @author Zeid Kootbally
  *

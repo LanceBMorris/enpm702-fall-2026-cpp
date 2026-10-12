@@ -45,7 +45,18 @@ std::vector<Position> make_route(int n) {
 // [Appendix ii] Double Delete, Measured: undefined::double_delete
 // [Appendix iii] Dangling Read, Measured: undefined::dangling_read
 
-// [Appendix iv] The Moved-from std::string
+// [Appendix iv] make_route
+namespace make_route_frame {
+void run() {
+  std::vector<Position> route{make_route(3)};
+  for (const Position& p : route) {
+    std::cout << '(' << p.x << ", " << p.y << ") ";
+  }
+  std::cout << '\n';  // (0, 0) (1, 0) (2, 0)
+}
+}  // namespace make_route_frame
+
+// [Appendix v] The Moved-from std::string
 namespace moved_string {
 void run() {
   std::string note{"robot 3 waits at the charging dock"};
@@ -59,7 +70,7 @@ void run() {
 }
 }  // namespace moved_string
 
-// [Appendix v] Move Assignment
+// [Appendix vi] Move Assignment
 namespace move_assignment {
 void run() {
   std::vector<Position> current{make_route(3)};
@@ -73,7 +84,7 @@ void run() {
 }
 }  // namespace move_assignment
 
-// [Appendix vi] std::exchange
+// [Appendix vii] std::exchange
 namespace exchange {
 void run() {
   std::vector<Position> route{make_route(1000)};
@@ -87,7 +98,7 @@ void run() {
 }
 }  // namespace exchange
 
-// [Appendix vii] How std::move Is Written
+// [Appendix viii] How std::move Is Written
 namespace move_written {
 // The standard's std::move, under another name ([forward] para 5).
 template <typename T>
@@ -105,7 +116,7 @@ void run() {
 }
 }  // namespace move_written
 
-// [Appendix viii] A unique_ptr with Its Own Deleter
+// [Appendix ix] A unique_ptr with Its Own Deleter
 namespace own_deleter {
 void run() {
   auto say_and_delete{[](RobotStatus* robot) {
@@ -123,12 +134,12 @@ void run() {
 }
 }  // namespace own_deleter
 
-// [Appendix ix] std::auto_ptr
+// [Appendix x] std::auto_ptr
 // No code: std::auto_ptr is not part of C++17 or C++20. g++ 13.3 still
 // accepts it with -std=c++20, with a -Wdeprecated-declarations warning, and
 // after std::auto_ptr<RobotStatus> b{a}; the pointer a is null.
 
-// [Appendix x] Testing for Empty
+// [Appendix xi] Testing for Empty
 namespace testing_empty {
 void run() {
   std::unique_ptr<RobotStatus> robot;  // empty
@@ -145,7 +156,7 @@ void run() {
 }
 }  // namespace testing_empty
 
-// [Appendix xi] unique_ptr to an Array
+// [Appendix xii] unique_ptr to an Array
 namespace unique_array {
 void run() {
   auto readings{std::make_unique<double[]>(5)};  // five doubles, each 0.0
@@ -160,7 +171,7 @@ void run() {
 }
 }  // namespace unique_array
 
-// [Appendix xii] swap
+// [Appendix xiii] swap
 namespace swapping {
 void run() {
   auto first{std::make_unique<RobotStatus>(3, 64.0, Position{2.0, 3.0}, false)};
@@ -173,12 +184,12 @@ void run() {
 }
 }  // namespace swapping
 
-// [Appendix xiii] make_shared Allocates Once
+// [Appendix xiv] make_shared Allocates Once
 // Counting allocations needs a replaced global operator new, which clashes
 // with the sanitizers this program is built with. The count is its own
 // program, allocations.cpp: 702run week7_allocations
 
-// [Appendix xiv] A Dashboard of weak_ptr
+// [Appendix xv] A Dashboard of weak_ptr
 namespace dashboard {
 void run() {
   std::vector<std::shared_ptr<RobotStatus>> fleet;
@@ -208,15 +219,16 @@ int main(int argc, char* argv[]) {
   const std::vector<Slide> slides{
       {2, "Double Delete, Measured", undefined::double_delete::run, true},
       {3, "Dangling Read, Measured", undefined::dangling_read::run, true},
-      {4, "The Moved-from std::string", moved_string::run},
-      {5, "Move Assignment", move_assignment::run},
-      {6, "std::exchange", exchange::run},
-      {7, "How std::move Is Written", move_written::run},
-      {8, "A unique_ptr with Its Own Deleter", own_deleter::run},
-      {10, "Testing for Empty", testing_empty::run},
-      {11, "unique_ptr to an Array", unique_array::run},
-      {12, "swap", swapping::run},
-      {14, "A Dashboard of weak_ptr", dashboard::run},
+      {4, "make_route", make_route_frame::run},
+      {5, "The Moved-from std::string", moved_string::run},
+      {6, "Move Assignment", move_assignment::run},
+      {7, "std::exchange", exchange::run},
+      {8, "How std::move Is Written", move_written::run},
+      {9, "A unique_ptr with Its Own Deleter", own_deleter::run},
+      {11, "Testing for Empty", testing_empty::run},
+      {12, "unique_ptr to an Array", unique_array::run},
+      {13, "swap", swapping::run},
+      {15, "A Dashboard of weak_ptr", dashboard::run},
   };
   return run_slides(slides, argc, argv, Part::appendix);
 }

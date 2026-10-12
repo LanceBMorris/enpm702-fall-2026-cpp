@@ -8,7 +8,7 @@
 #   702run week7_playground 12    run only the code of [Slide 12]
 #   702run week7_appendix         run the code of every appendix frame
 #   702run week7_appendix ii      run only the code of [Appendix ii]
-#   702run week7_allocations      [Appendix xiii]: count make_shared's allocations
+#   702run week7_allocations      [Appendix xiv]: count make_shared's allocations
 #
 # Folders:
 #   playground/   the code of every slide, one file per section (week7_playground)
@@ -56,7 +56,7 @@ target_include_directories(week7_appendix PRIVATE common undefined)
 target_link_options(week7_appendix PRIVATE -fsanitize=address,undefined)
 
 # -----------------------------------------------------------------------------
-# 4. [Appendix xiii] counts heap allocations by replacing the global operator
+# 4. [Appendix xiv] counts heap allocations by replacing the global operator
 #    new. The sanitizers replace it as well, so this one frame is a program of
 #    its own, built without them.
 # -----------------------------------------------------------------------------
