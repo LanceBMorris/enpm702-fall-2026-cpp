@@ -7,7 +7,7 @@
  * section file and runs them.
  *
  * @code
- * 702run week7_playground 48    # only [Slide 48]
+ * 702run week7_playground 49    # only [Slide 49]
  * @endcode
  *
  * Robot 3 is in the fleet and waits in the charging queue at the same time,
@@ -27,10 +27,10 @@ namespace shared {
 
 using Fleet = std::vector<std::shared_ptr<RobotStatus>>;
 
-// [Slide 45] A Robot in Two Lists
+// [Slide 46] A Robot in Two Lists
 // The slide states the problem; its code is in the comments of the slide.
 
-// [Slide 46] Creating One
+// [Slide 47] Creating One
 namespace creating {
 void run() {
   Fleet fleet;
@@ -44,7 +44,7 @@ void run() {
 }
 }  // namespace creating
 
-// [Slide 47] The Control Block
+// [Slide 48] The Control Block
 namespace control_block {
 void run() {
   auto robot{std::make_shared<RobotStatus>(3, 14.0, Position{2.0, 3.0}, false)};
@@ -55,7 +55,7 @@ void run() {
 }
 }  // namespace control_block
 
-// [Slide 48] use_count, Step by Step
+// [Slide 49] use_count, Step by Step
 namespace use_count_steps {
 void run() {
   auto robot{std::make_shared<RobotStatus>(3, 14.0, Position{2.0, 3.0}, false)};
@@ -71,7 +71,7 @@ void run() {
 }
 }  // namespace use_count_steps
 
-// [Slide 49] The Last Owner Frees It
+// [Slide 50] The Last Owner Frees It
 namespace last_owner {
 void run() {
   Fleet fleet;
@@ -87,7 +87,7 @@ void run() {
 }  // LeakSanitizer reports nothing at exit: the robot was freed
 }  // namespace last_owner
 
-// [Slide 50] Passing: Borrow
+// [Slide 51] Passing: Borrow
 namespace borrow {
 void print_status(const RobotStatus& robot) {  // only reads the robot
   std::cout << "  robot " << robot.id << ": " << robot.battery_pct << " %\n";
@@ -100,7 +100,7 @@ void run() {
 }
 }  // namespace borrow
 
-// [Slide 51] Passing: Share
+// [Slide 52] Passing: Share
 namespace share {
 void add_to_queue(Fleet& queue, std::shared_ptr<RobotStatus> robot) {  // keeps a copy
   queue.push_back(std::move(robot));
@@ -114,7 +114,7 @@ void run() {
 }
 }  // namespace share
 
-// [Slide 52] Passing: const shared_ptr&
+// [Slide 53] Passing: const shared_ptr&
 namespace maybe_share {
 void queue_if_low(Fleet& queue, const std::shared_ptr<RobotStatus>& robot) {
   if (robot->battery_pct < 20.0) {
@@ -134,7 +134,7 @@ void run() {
 }
 }  // namespace maybe_share
 
-// [Slide 53] Returning
+// [Slide 54] Returning
 namespace returning {
 std::unique_ptr<RobotStatus> make_robot(int id) {
   return std::make_unique<RobotStatus>(id, 100.0, Position{0.0, 0.0}, false);
@@ -154,14 +154,14 @@ void run() {
 // true when a full run must skip it.
 std::vector<Slide> slides() {
   return {
-      {46, "Creating One", creating::run},
-      {47, "The Control Block", control_block::run},
-      {48, "use_count, Step by Step", use_count_steps::run},
-      {49, "The Last Owner Frees It", last_owner::run},
-      {50, "Passing: Borrow", borrow::run},
-      {51, "Passing: Share", share::run},
-      {52, "Passing: const shared_ptr&", maybe_share::run},
-      {53, "Returning", returning::run},
+      {47, "Creating One", creating::run},
+      {48, "The Control Block", control_block::run},
+      {49, "use_count, Step by Step", use_count_steps::run},
+      {50, "The Last Owner Frees It", last_owner::run},
+      {51, "Passing: Borrow", borrow::run},
+      {52, "Passing: Share", share::run},
+      {53, "Passing: const shared_ptr&", maybe_share::run},
+      {54, "Returning", returning::run},
   };
 }
 

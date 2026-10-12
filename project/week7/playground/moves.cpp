@@ -12,7 +12,7 @@
  *
  * The value category slides print the category of each expression with
  * CATEGORY(e), which reads decltype((e)): T& for an lvalue, T&& for an xvalue,
- * T for a prvalue ([Slide 21]). Code that does not compile, or that warns, is
+ * T for a prvalue ([Slide 22]). Code that does not compile, or that warns, is
  * commented out where its slide shows it: uncomment it, build, and you get the
  * slide's message.
  */
@@ -72,7 +72,7 @@ void run() {
 }
 }  // namespace handing_route
 
-// [Slide 14] The Moved-from Object
+// [Slide 15] The Moved-from Object
 namespace moved_from {
 void run() {
   std::vector<Position> route{make_route(1000)};
@@ -86,7 +86,7 @@ void run() {
 }
 }  // namespace moved_from
 
-// [Slide 17] lvalues
+// [Slide 18] lvalues
 namespace lvalues {
 RobotStatus& first_robot(std::vector<RobotStatus>& fleet) { return fleet[0]; }
 
@@ -103,7 +103,7 @@ void run() {
 }
 }  // namespace lvalues
 
-// [Slide 18] prvalues
+// [Slide 19] prvalues
 namespace prvalues {
 void run() {
   int a{2};
@@ -118,7 +118,7 @@ void run() {
 }
 }  // namespace prvalues
 
-// [Slide 19] xvalues
+// [Slide 20] xvalues
 namespace xvalues {
 struct Robot {
   RobotStatus status;
@@ -137,7 +137,7 @@ void run() {
 }
 }  // namespace xvalues
 
-// [Slide 20] Temporary Materialization
+// [Slide 21] Temporary Materialization
 namespace materialization {
 void run() {
   std::cout << "make_robot(3): " << CATEGORY(make_robot(3)) << '\n';        // prvalue
@@ -147,7 +147,7 @@ void run() {
 }
 }  // namespace materialization
 
-// [Slide 21] The decltype Test
+// [Slide 22] The decltype Test
 namespace testing_category {
 std::vector<Position> route{make_route(3)};
 static_assert(std::is_same_v<decltype((route)), std::vector<Position>&>);              // lvalue
@@ -159,7 +159,7 @@ void run() {
 }
 }  // namespace testing_category
 
-// [Slide 22] Exercise 1: Name the Category
+// [Slide 23] Exercise 1: Name the Category
 namespace exercise_1 {
 struct Robot {
   RobotStatus status;
@@ -188,7 +188,7 @@ void run() {
 }
 }  // namespace exercise_1
 
-// [Slide 23] rvalue References
+// [Slide 24] rvalue References
 namespace rvalue_references {
 void run() {
   std::vector<Position> route{make_route(1000)};
@@ -202,7 +202,7 @@ void run() {
 }
 }  // namespace rvalue_references
 
-// [Slide 24] Named rvalue References
+// [Slide 25] Named rvalue References
 namespace named_rvalue_ref {
 void run() {
   std::vector<Position>&& r{make_route(10)};
@@ -213,7 +213,7 @@ void run() {
 }
 }  // namespace named_rvalue_ref
 
-// [Slide 25] Overloads for Copy and Move
+// [Slide 26] Overloads for Copy and Move
 namespace pick_copy_or_move {
 std::vector<Position> robot_route;
 
@@ -240,7 +240,7 @@ void run() {
 }
 }  // namespace pick_copy_or_move
 
-// [Slide 26] std::move, a Cast
+// [Slide 27] std::move, a Cast
 namespace move_moves_nothing {
 void run() {
   std::vector<Position> route{make_route(1000)};
@@ -254,7 +254,7 @@ void run() {
 }
 }  // namespace move_moves_nothing
 
-// [Slide 27] std::move on a const Object
+// [Slide 28] std::move on a const Object
 namespace move_const {
 void run() {
   const std::vector<Position> route{make_route(1000)};
@@ -265,7 +265,7 @@ void run() {
 }
 }  // namespace move_const
 
-// [Slide 28] A Parameter the Function Moves From
+// [Slide 29] A Parameter the Function Moves From
 // Core Guidelines F.18: when a function always moves from a parameter, take it
 // by X&& and std::move it. The caller must then say std::move for an lvalue,
 // so a copy never happens by accident.
@@ -294,7 +294,7 @@ void run() {
 }
 }  // namespace will_move_from
 
-// [Slide 29] Return by Value, Again
+// [Slide 30] Return by Value, Again
 namespace return_by_value {
 std::vector<Position> plan_route(int n) {
   std::vector<Position> route{make_route(n)};
@@ -318,20 +318,20 @@ void run() {
 std::vector<Slide> slides() {
   return {
       {12, "Handing a Route to a Robot", handing_route::run},
-      {14, "The Moved-from Object", moved_from::run},
-      {17, "lvalues", lvalues::run},
-      {18, "prvalues", prvalues::run},
-      {19, "xvalues", xvalues::run},
-      {20, "Temporary Materialization", materialization::run},
-      {21, "The decltype Test", testing_category::run},
-      {22, "Exercise 1: Name the Category", exercise_1::run},
-      {23, "rvalue References", rvalue_references::run},
-      {24, "Named rvalue References", named_rvalue_ref::run},
-      {25, "Overloads for Copy and Move", pick_copy_or_move::run},
-      {26, "std::move, a Cast", move_moves_nothing::run},
-      {27, "std::move on a const Object", move_const::run},
-      {28, "A Parameter the Function Moves From", will_move_from::run},
-      {29, "Return by Value, Again", return_by_value::run},
+      {15, "The Moved-from Object", moved_from::run},
+      {18, "lvalues", lvalues::run},
+      {19, "prvalues", prvalues::run},
+      {20, "xvalues", xvalues::run},
+      {21, "Temporary Materialization", materialization::run},
+      {22, "The decltype Test", testing_category::run},
+      {23, "Exercise 1: Name the Category", exercise_1::run},
+      {24, "rvalue References", rvalue_references::run},
+      {25, "Named rvalue References", named_rvalue_ref::run},
+      {26, "Overloads for Copy and Move", pick_copy_or_move::run},
+      {27, "std::move, a Cast", move_moves_nothing::run},
+      {28, "std::move on a const Object", move_const::run},
+      {29, "A Parameter the Function Moves From", will_move_from::run},
+      {30, "Return by Value, Again", return_by_value::run},
   };
 }
 
