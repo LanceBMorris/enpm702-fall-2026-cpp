@@ -65,7 +65,7 @@ namespace lambda_expression {
 void run() {
   // create it, call it at once
   std::cout << std::boolalpha << "called at once with 35.0: "
-            << [](double pct) { return pct < 40.0; }(35.0) << std::noboolalpha << '\n';  // true
+            << [](double pct) { return pct < 40.0; }(45.0) << std::noboolalpha << '\n';  // true
 
   auto is_low = [](double pct) { return pct < 40.0; };  // create it, store it
   std::cout << std::boolalpha << "is_low(35.0): " << is_low(35.0)

@@ -49,8 +49,8 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
-#include <utility>
 #include <vector>
+#include <utility>
 
 // =============================================================================
 // NAMESPACE SCOPE
@@ -140,6 +140,7 @@ int main() {
     // #########################################################################
     // SECTION: THE TYPE OF EVERY SIZE
     // #########################################################################
+
 
     // --- [Slide 4] std::size_t is unsigned -----------------------------------
     // The loop is left commented: it never ends. -Wall says so:
@@ -832,20 +833,20 @@ int main() {
     // --- [Slide 67] [Slide 68] [Slide 69] [Slide 70] SSO, then the heap ------
     // 15 characters fit inside the object: that number belongs to libstdc++.
     // data() shows where the characters are: inside imu, or on the heap.
-#if 0
+#if 1
     {
-        std::cout << sizeof(std::string) << '\n';  // 32 bytes, whatever the text is
+        // std::cout << sizeof(std::string) << '\n';  // 32 bytes, whatever the text is
 
         std::string imu{"BMI088"};  // [Slide 68]
-        std::cout << imu.size() << ' ' << imu.capacity() << '\n';  // 6 15
-        std::cout << &imu << ' ' << static_cast<const void*>(imu.data()) << '\n';  // 16 bytes apart
+        // std::cout << imu.size() << ' ' << imu.capacity() << '\n';  // 6 15
+        // std::cout << &imu << ' ' << static_cast<const void*>(imu.data()) << '\n';  // 16 bytes apart
 
-        imu = "ICM-42688-P";  // [Slide 69]
-        std::cout << imu.size() << ' ' << imu.capacity() << '\n';  // 11 15
+        // imu = "ICM-42688-P";  // [Slide 69]
+        // std::cout << imu.size() << ' ' << imu.capacity() << '\n';  // 11 15
 
         imu = "Xsens MTi-630 AHRS";  // [Slide 70] On the heap
         std::cout << imu.size() << ' ' << imu.capacity() << '\n';  // 18 30
-        std::cout << &imu << ' ' << static_cast<const void*>(imu.data()) << '\n';  // far apart
+        // std::cout << &imu << ' ' << static_cast<const void*>(imu.data()) << '\n';  // far apart
     }
 #endif
 

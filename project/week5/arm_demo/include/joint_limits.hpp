@@ -22,4 +22,5 @@ constexpr double wrist_max_deg{45.0};
  * @return deg when it is between -limit and limit, otherwise the nearer of
  *         the two limits.
  */
+
 [[nodiscard]] double clamp_joint(double deg, double limit = max_deg);
